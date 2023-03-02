@@ -1,36 +1,21 @@
-import React, { useEffect } from "react";
+import React, { useState } from "react";
+import Page1 from "./components/page1";
+import Page2 from "./components/page2";
+
+import { BrowserRouter } from "react-router-dom";
 function App() {
-  useEffect(() => {
-    window.paypal
-      .Buttons({
-        creteOrder: (data, actions) => {
-          return actions.order.create({
-            purchase_units: [
-              {
-                amount: {
-                  value: 600.0,
-                },
-              },
-            ],
-          });
-        },
-        onApprove: function (data, actions) {
-          console.log("done");
-          return actions.order.capture().then((details) => {
-            window.open("http://osamaelkassaby.com");
-            alert("complete by " + details.payer.name.given_name);
-            console.log(details);
-          });
-        },
-      })
-      .render("#paypal-button-container");
-  }, []);
-  // START ///
+  const [price, setprice] = useState("");
 
-  /*code here */
+  const onchangeprice = (e) => {
+    setprice(e.target.value);
+  };
 
-  //HERER///
-  return <div id="paypal-button-container"></div>;
+  return (
+    <div className="">
+      <Page2 onchangeprice={onchangeprice} price={price} />
+      <Page1 price={price} />
+    </div>
+  );
 }
 
 export default App;
