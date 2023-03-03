@@ -1,13 +1,26 @@
 import React from "react";
-import To from "react-router";
-import { useNavigate } from "react-router";
-import { Link } from "react-router-dom";
+
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 const Page2 = ({ onchangeprice, price }) => {
-  console.log(price);
+  const notify = (msg, type) => {
+    if (type === "warn") {
+      toast.warn(msg);
+    } else if (type === "success") {
+      toast.success(msg);
+    } else if (type === "error") {
+      toast.error(msg);
+    }
+  };
+
+  if (price < 0) {
+    notify("لا يمكن التبرع بهذا الرقم .. من فضلك ادخل الرقم صحيح ", "warn");
+  }
 
   return (
     <div className="container text-center pt-5">
-      <h1 className="tittle">
+      <h1 className="tittle pt-5">
         إِنْ تُبْدُوا الصَّدَقَاتِ فَنِعِمَّا هِيَ وَإِنْ تُخْفُوهَا
         وَتُؤْتُوهَا الْفُقَرَاءَ فَهُوَ خَيْرٌ لَكُمْ وَيُكَفِّرُ عَنْكُمْ مِنْ
         سَيِّئَاتِكُمْ وَاللَّهُ بِمَا تَعْمَلُونَ خَبِيرٌ
@@ -23,6 +36,7 @@ const Page2 = ({ onchangeprice, price }) => {
           />
         </div>
       </form>
+      <ToastContainer />
     </div>
   );
 };

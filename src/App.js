@@ -13,7 +13,7 @@ function App() {
   return (
     <div className="">
       <Page2 onchangeprice={onchangeprice} price={price} />
-      <Page1 price={price} />
+      <Page1 price={price} setprice={setprice} />
     </div>
   );
 }
